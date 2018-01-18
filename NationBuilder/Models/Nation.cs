@@ -16,7 +16,6 @@ namespace NationBuilder.Models
         public int Geography { get; set; }
         public virtual GameUser User { get; set; }
 
-
         public Nation()
         {
         }

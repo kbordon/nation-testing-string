@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using NationBuilder.Models;
+using System.Security.Claims;
 
 namespace NationBuilder.Controllers
 {
@@ -24,6 +25,22 @@ namespace NationBuilder.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(Nation nation)
+        {
+            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var currentUser = await _userManager.FindByIdAsync(userId);
+            nation.User = currentUser;
+            _db.Nations.Add(nation);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }
