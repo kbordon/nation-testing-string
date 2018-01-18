@@ -7,10 +7,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using NationBuilder.Models;
 using System.Security.Claims;
+using NationBuilder.ViewModels;
 
 namespace NationBuilder.Controllers
 {
-    [Authorize]
     public class NationController : Controller
     {
 
@@ -20,7 +20,7 @@ namespace NationBuilder.Controllers
         public NationController (UserManager<GameUser> userManager, GameDbContext db)
         {
             _userManager = userManager;
-            _db = db;
+            _db = db; 
         }
         public IActionResult Index()
         {
@@ -29,7 +29,10 @@ namespace NationBuilder.Controllers
 
         public IActionResult Create()
         {
-            return View();
+            CreateViewModel cvm = new CreateViewModel();
+            Console.WriteLine("###############################" + CreateViewModel.Governments[5]);
+            Dictionary<int, string> test = CreateViewModel.Governments;
+            return View("test");
         }
 
         [HttpPost]

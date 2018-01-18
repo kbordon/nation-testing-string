@@ -1,0 +1,1 @@
+﻿* Figure out how to put lists in a class rather than hard-coding into the View.
